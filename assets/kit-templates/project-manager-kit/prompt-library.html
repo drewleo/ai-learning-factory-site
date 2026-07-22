@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompt Library — {{KIT_TITLE}}</title>
+<style>
+:root {
+  --surface-1: #fcfcfb;
+  --page-plane: #f9f9f7;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --gridline: #e1e0d9;
+  --border: rgba(11,11,11,0.10);
+  --accent: #2a78d6;
+  --accent-ink: #ffffff;
+  --accent-wash: #cde2fb;
+  --success: #006300;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --shadow-card: 0 1px 2px rgba(11,11,11,0.04), 0 8px 24px -12px rgba(11,11,11,0.12);
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --max-width: 860px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1a1a19;
+    --page-plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --border: rgba(255,255,255,0.10);
+    --accent: #3987e5;
+    --accent-ink: #ffffff;
+    --accent-wash: #17304f;
+    --success: #3fbf3f;
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -12px rgba(0,0,0,0.6);
+  }
+}
+* { box-sizing: border-box; }
+body { margin:0; font-family: var(--font-sans); background: var(--page-plane); color: var(--text-primary); line-height:1.6; }
+h1,h2,h3 { line-height:1.2; margin: 0 0 0.5em; font-weight:650; letter-spacing:-0.01em; }
+p { margin: 0 0 1em; color: var(--text-secondary); }
+.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
+a { color: var(--accent); }
+
+.kit-header { position: sticky; top:0; z-index:10; background: color-mix(in srgb, var(--page-plane) 85%, transparent); backdrop-filter: blur(8px); border-bottom:1px solid var(--border); }
+.header-inner { max-width: var(--max-width); margin:0 auto; padding: 14px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.kit-brand { font-weight:700; display:flex; align-items:center; }
+.kit-brand a { color: var(--text-primary); text-decoration:none; display:flex; align-items:center; }
+.module-progress { font-size:0.85rem; color: var(--text-muted); background: var(--surface-1); border:1px solid var(--border); padding:4px 12px; border-radius:999px; white-space:nowrap; }
+
+.breadcrumb { font-size:0.85rem; color: var(--text-muted); margin: 20px 0 8px; }
+.breadcrumb a { color: var(--text-muted); }
+.lede { font-size:1.1rem; }
+
+.card { background: var(--surface-1); border:1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 20px 24px; margin: 24px 0; }
+.card h2 { margin-bottom:14px; }
+
+.prompt-item { display:flex; align-items:flex-start; gap:12px; border-top:1px solid var(--gridline); padding: 14px 0; }
+.prompt-item:first-of-type { border-top:none; }
+.prompt-text { flex:1; font-size:0.95rem; color: var(--text-primary); background: var(--page-plane); border:1px solid var(--border); border-radius: var(--radius-sm); padding:10px 14px; }
+.copy-btn { flex-shrink:0; background: transparent; border:1px solid var(--border); color: var(--text-primary); border-radius: var(--radius-sm); padding:8px 14px; font-size:0.85rem; cursor:pointer; font-family:inherit; white-space:nowrap; }
+.copy-btn:hover { border-color: var(--accent); }
+.copy-btn.copied { border-color: var(--success); color: var(--success); }
+
+.note { font-size:0.85rem; color: var(--text-muted); border-top:1px solid var(--gridline); padding-top:16px; margin-top:8px; }
+
+.module-nav { display:flex; justify-content:space-between; gap:16px; margin-top: 32px; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 22px; border-radius:999px; font-weight:600; font-size:0.95rem; border:1px solid transparent; cursor:pointer; text-decoration:none; background: var(--accent); color:#fff; }
+.btn:hover { background:#1c5cab; }
+.module-nav a { text-decoration:none; }
+
+footer.kit-footer { text-align:center; padding: 24px; color: var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border); margin-top:40px; }
+</style>
+</head>
+<body>
+
+<header class="kit-header">
+  <div class="header-inner">
+    <div class="kit-brand"><a href="index.html">{{LOGO_IMG_TAG}}{{KIT_TITLE}}</a></div>
+    <div class="module-progress">Reference</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="breadcrumb"><a href="index.html">Kit Home</a> / Prompt Library</nav>
+  <h1>PM Prompt Library</h1>
+  <p class="lede">Ready-to-use prompts, organized by the same modules as the kit. Each works in Copilot, ChatGPT Enterprise, or Claude with minor phrasing tweaks — swap <code>{{PROJECT_NAME}}</code> and other bracketed fields for your own project's details.</p>
+
+  <section class="card">
+    <h2>Status Updates &amp; Reporting</h2>
+    <div class="prompt-item"><div class="prompt-text">Draft a one-paragraph status update for {{PROJECT_NAME}} for the steering committee, covering what shipped this week, what's at risk, and what's due next week. Keep it under 150 words.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+    <div class="prompt-item"><div class="prompt-text">Summarize the attached task list. Group by status (on track / at risk / overdue) and flag anything more than 3 days past due.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+    <div class="prompt-item"><div class="prompt-text">Turn this list of completed tasks into 3 bullet points a non-technical stakeholder would understand, focused on business impact, not task names.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+  </section>
+
+  <section class="card">
+    <h2>RAID Logs &amp; Risk</h2>
+    <div class="prompt-item"><div class="prompt-text">Based on this task list and these notes, draft RAID log entries (Risks, Assumptions, Issues, Dependencies) for {{PROJECT_NAME}}. Flag anything that should be escalated.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+    <div class="prompt-item"><div class="prompt-text">Review this list of open risks and rank them by likelihood and impact. Explain your reasoning for the top 3.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+  </section>
+
+  <section class="card">
+    <h2>Meeting Prep &amp; Follow-Up</h2>
+    <div class="prompt-item"><div class="prompt-text">Draft an agenda for this week's {{PROJECT_NAME}} steering committee sync, prioritizing items that are overdue or newly at risk based on the attached plan.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+    <div class="prompt-item"><div class="prompt-text">Summarize this meeting transcript into decisions made, action items with owners, and open questions.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+  </section>
+
+  <section class="card">
+    <h2>Stakeholder Communication</h2>
+    <div class="prompt-item"><div class="prompt-text">Rewrite this update for an executive audience — cut detail, lead with the decision or ask, under 100 words.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+    <div class="prompt-item"><div class="prompt-text">Draft a message to [stakeholder/team] explaining this schedule change, why it happened, and what it means for their deliverables.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+  </section>
+
+  <section class="card">
+    <h2>Planning &amp; Scoping</h2>
+    <div class="prompt-item"><div class="prompt-text">Given this project scope description, propose a task breakdown grouped into workstreams, with rough owners and sequencing. Flag any dependencies you'd expect between workstreams.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+    <div class="prompt-item"><div class="prompt-text">Review this task list for gaps — what's commonly needed for a project like this that isn't represented yet?</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+  </section>
+
+  <section class="card">
+    <h2>Dashboard &amp; Reporting Build</h2>
+    <div class="prompt-item"><div class="prompt-text">Based on this task data, propose 3 dashboard views a steering committee would find useful, and explain what decision each one supports.</div><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+    <p class="note">Placeholder note: prompts above are illustrative starting points for the kit — validate wording against your actual Copilot Studio / ChatGPT Enterprise / Claude environment before shipping.</p>
+  </section>
+
+  <nav class="module-nav">
+    <a class="btn" style="background:transparent;border:1px solid var(--border);color:var(--text-primary);" href="index.html">&larr; Kit Home</a>
+  </nav>
+</main>
+
+<footer class="kit-footer">{{KIT_TITLE}} — Prompt Library</footer>
+
+<script>
+function copyPrompt(btn){
+  var text = btn.previousElementSibling.textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    var original = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = original; btn.classList.remove('copied'); }, 1500);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 1: Building {{AGENT_NAME}} — {{KIT_TITLE}}</title>
+<style>
+:root {
+  --surface-1: #fcfcfb;
+  --page-plane: #f9f9f7;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --gridline: #e1e0d9;
+  --border: rgba(11,11,11,0.10);
+  --accent: #2a78d6;
+  --accent-ink: #ffffff;
+  --accent-wash: #cde2fb;
+  --success: #006300;
+  --danger: #b3261e;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-card: 0 1px 2px rgba(11,11,11,0.04), 0 8px 24px -12px rgba(11,11,11,0.12);
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --max-width: 860px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1a1a19;
+    --page-plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --border: rgba(255,255,255,0.10);
+    --accent: #3987e5;
+    --accent-ink: #ffffff;
+    --accent-wash: #17304f;
+    --success: #3fbf3f;
+    --danger: #e5645a;
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -12px rgba(0,0,0,0.6);
+  }
+}
+* { box-sizing: border-box; }
+body { margin:0; font-family: var(--font-sans); background: var(--page-plane); color: var(--text-primary); line-height:1.6; }
+img { max-width:100%; }
+h1,h2,h3,h4 { line-height:1.2; margin: 0 0 0.5em; font-weight:650; letter-spacing:-0.01em; }
+p { margin: 0 0 1em; color: var(--text-secondary); }
+.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
+a { color: var(--accent); }
+
+.kit-header { position: sticky; top:0; z-index:10; background: color-mix(in srgb, var(--page-plane) 85%, transparent); backdrop-filter: blur(8px); border-bottom:1px solid var(--border); }
+.header-inner { max-width: var(--max-width); margin:0 auto; padding: 14px 24px; display:flex; align-items:center; justify-content:space-between; gap: 12px; flex-wrap: wrap; }
+.kit-brand { font-weight:700; display:flex; align-items:center; }
+.kit-brand a { color: var(--text-primary); text-decoration:none; display:flex; align-items:center; }
+.module-progress { font-size:0.85rem; color: var(--text-muted); background: var(--surface-1); border:1px solid var(--border); padding:4px 12px; border-radius:999px; white-space:nowrap; }
+
+.breadcrumb { font-size:0.85rem; color: var(--text-muted); margin: 20px 0 8px; }
+.breadcrumb a { color: var(--text-muted); }
+.lede { font-size:1.1rem; }
+
+.scenario-banner { background: var(--accent-wash); border-left:4px solid var(--accent); border-radius: var(--radius-sm); padding:16px 20px; margin: 20px 0; }
+.scenario-banner p { margin:0; color: var(--text-primary); }
+.scenario-banner strong { color: var(--text-primary); }
+
+.card { background: var(--surface-1); border:1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 20px 24px; margin: 20px 0; }
+
+.objectives-box ul, .job-aid ul { list-style: none; padding:0; margin:0; }
+.objectives-box li { padding: 6px 0 6px 26px; position:relative; color: var(--text-secondary);}
+.objectives-box li::before { content:"\2713"; position:absolute; left:0; color: var(--accent); font-weight:700; }
+.job-aid li { padding: 5px 0 5px 20px; position:relative; color: var(--text-secondary); font-size:0.95rem; }
+.job-aid li::before { content:"\2022"; position:absolute; left:4px; color: var(--accent); }
+
+.step { border-top:1px solid var(--gridline); padding: 20px 0; }
+.step:first-of-type { border-top:none; padding-top:8px; }
+.step h3 { margin-bottom:6px; }
+.try-it { border:1px dashed var(--border); border-radius: var(--radius-sm); padding:12px 16px; font-size:0.92rem; color: var(--text-secondary); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.try-it strong { color: var(--text-primary); }
+
+.job-aid-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 640px) { .job-aid-grid { grid-template-columns: 1fr; } }
+.job-aid-grid h4 { margin: 0 0 8px; font-size:0.85rem; text-transform: uppercase; letter-spacing:0.03em; color: var(--text-muted); }
+
+.quiz .question { margin-bottom: 24px; }
+.quiz .q-text { font-weight:600; margin-bottom:10px; color: var(--text-primary); }
+.quiz .options label { display:block; border:1px solid var(--border); border-radius: var(--radius-sm); padding:10px 14px; margin-bottom:8px; cursor:pointer; transition: border-color .15s ease, background .15s ease; }
+.quiz .options label:hover { border-color: var(--accent); }
+.quiz .options input { margin-right:10px; }
+.quiz .options label.correct { border-color: var(--success); background: color-mix(in srgb, var(--success) 12%, transparent); }
+.quiz .options label.incorrect { border-color: var(--danger); background: color-mix(in srgb, var(--danger) 12%, transparent); }
+.quiz .explanation { display:none; font-size:0.88rem; color: var(--text-muted); margin-top:6px; }
+.quiz .explanation.show { display:block; }
+
+.btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 22px; border-radius:999px; font-weight:600; font-size:0.95rem; border:1px solid transparent; cursor:pointer; text-decoration:none; background: var(--accent); color:#fff; }
+.btn:hover { background:#1c5cab; }
+
+#quizResult { margin-top:14px; font-weight:600; }
+
+.complete-toggle { margin: 28px 0; padding:16px 20px; border:1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-1); }
+.complete-toggle label { display:flex; align-items:center; gap:10px; cursor:pointer; font-weight:600; margin:0; }
+.complete-toggle input { width:18px; height:18px; }
+
+.module-nav { display:flex; justify-content:space-between; gap:16px; margin-top: 32px; flex-wrap:wrap; }
+.module-nav a { text-decoration:none; }
+
+footer.kit-footer { text-align:center; padding: 24px; color: var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border); margin-top:40px; }
+</style>
+</head>
+<body>
+
+<header class="kit-header">
+  <div class="header-inner">
+    <div class="kit-brand"><a href="index.html">{{LOGO_IMG_TAG}}{{KIT_TITLE}}</a></div>
+    <div class="module-progress">Module 1 of 4</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="breadcrumb"><a href="index.html">Kit Home</a> / Module 1</nav>
+  <h1>Building Your PM Agent in Copilot Studio</h1>
+  <p class="lede">Create "{{AGENT_NAME}}" — an agent scoped to one project that answers status questions and drafts stakeholder updates.</p>
+
+  <div class="scenario-banner">
+    <p><strong>Where we are in the story:</strong> {{PERSONA_FULL}}, Senior PM at {{COMPANY_NAME}}, spends hours a week answering "what's the status of X" and writing the same update in different words. Today {{PERSONA_FIRST}} builds an agent to do that instead.</p>
+  </div>
+
+  <section class="card objectives-box">
+    <h2>What you'll learn</h2>
+    <ul>
+      <li>Explain what a PM-scoped Copilot Studio agent can do that generic Copilot chat can't</li>
+      <li>Create an agent and write instructions that keep it focused on one project</li>
+      <li>Ground the agent in the project's own data instead of general knowledge</li>
+      <li>Build a topic that handles a recurring PM request with a defined flow</li>
+      <li>Add an action that turns a request into a real output</li>
+      <li>Test, publish, and share the agent with the project team</li>
+    </ul>
+  </section>
+
+  <section class="lesson">
+    <h2>Lesson</h2>
+
+    <div class="step">
+      <h3>Why Build a PM Agent, Not Just Use Copilot</h3>
+      <p>A generic Copilot answers general questions. It doesn't know {{PROJECT_NAME}} exists, so every "what's the status of X" question still lands on {{PERSONA_FIRST}}'s desk. The fix isn't a better prompt — it's an agent scoped to just this project, grounded in this project's real data.</p>
+    </div>
+
+    <div class="step">
+      <h3>Step 1: Create and Scope the Agent</h3>
+      <p>Create a new agent and name it "{{AGENT_NAME}}." The instructions are what make it useful: write scoping language such as <em>"You only answer questions about {{PROJECT_NAME}}. If asked about anything else, say so."</em> Narrow beats broad — a PM agent that tries to answer everything ends up answering nothing well.</p>
+      <div class="try-it"><strong>In Copilot Studio:</strong> Create a new agent → name it → open the Instructions field → write the scoping sentence explicitly, don't leave it implied.</div>
+    </div>
+
+    <div class="step">
+      <h3>Step 2: Ground It in the Real Plan</h3>
+      <p>Connect the exported {{PROJECT_NAME}} plan (from Planner, or a SharePoint list mirroring it) as a knowledge source. This is what turns a generic answer into a grounded one — when someone asks "what's the status of the vendor integration task," the agent should cite the actual task and owner, not guess.</p>
+      <div class="try-it"><strong>In Copilot Studio:</strong> Add a knowledge source → point it at the exported plan data → wait for it to index → test with a real question in the Test chat pane before moving on.</div>
+    </div>
+
+    <div class="step">
+      <h3>Step 3: Build the "Status Update" Topic</h3>
+      <p>This is the hours-saved moment. Build a topic triggered by phrases like "draft a status update" that pulls current task data and produces a stakeholder-ready summary — in {{PERSONA_FIRST}}'s voice, not a generic template.</p>
+      <div class="try-it"><strong>In Copilot Studio:</strong> Create a new topic → add trigger phrases your team would actually type, not just the formal one → wire it to pull from the knowledge source → test it live and check the draft reads like something a stakeholder would accept.</div>
+    </div>
+
+    <div class="step">
+      <h3>Step 4: Flag Overdue Tasks Automatically</h3>
+      <p>Add an action that checks for tasks past their due date and flags them. This catches risk before the steering committee has to ask about it — turning the agent from reactive (answers when asked) to proactive (surfaces risk unprompted).</p>
+      <div class="try-it"><strong>In Copilot Studio:</strong> Add an action scoped to overdue-task detection → run it against the real plan → confirm it lists task and owner, not just a count.</div>
+    </div>
+
+    <div class="step">
+      <h3>Step 5: Publish and Share</h3>
+      <p>Test end-to-end with the questions your team actually asks — not just the ones you wrote the topics for. Then publish, and share the agent in the {{PROJECT_NAME}} Teams channel. The loop: scope it to the job, ground it in real data, and let it do the writing that used to take 45 minutes.</p>
+    </div>
+  </section>
+
+  <section class="card job-aid">
+    <h2>Job Aid — Quick Reference</h2>
+    <p style="margin-bottom:16px;">A one-page checklist to keep at your desk when building or updating {{AGENT_NAME}}.</p>
+    <div class="job-aid-grid">
+      <div>
+        <h4>Before You Start</h4>
+        <ul>
+          <li>Confirm you have access to a Copilot Studio environment</li>
+          <li>Export or link your project's plan as a knowledge source</li>
+          <li>Have a sample status-update format ready to model drafts on</li>
+        </ul>
+        <h4 style="margin-top:16px;">Core Steps</h4>
+        <ul>
+          <li>Create the agent and write scoping instructions</li>
+          <li>Connect your plan data as a knowledge source</li>
+          <li>Test with a real status question before building more</li>
+          <li>Build a "status update" topic on real trigger phrases</li>
+          <li>Add an overdue-task flag action</li>
+          <li>Test end-to-end, publish, and share in Teams</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Common Pitfalls</h4>
+        <ul>
+          <li>Scoping instructions too loosely — the agent answers off-topic questions</li>
+          <li>Forgetting to re-sync plan data, so answers go stale</li>
+          <li>Modeling the status update on a format stakeholders don't actually want</li>
+          <li>Not testing with the questions your team really asks</li>
+        </ul>
+        <h4 style="margin-top:16px;">Where to Go for Help</h4>
+        <ul>
+          <li>Microsoft Learn documentation for Copilot Studio</li>
+          <li>This kit's <a href="prompt-library.html">Prompt Library</a></li>
+          <li>Your Copilot Studio environment admin</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="card quiz">
+    <h2>Knowledge Check</h2>
+    <div class="question" data-answer="b">
+      <p class="q-text">1. Why scope {{AGENT_NAME}} to just {{PROJECT_NAME}} instead of making it general-purpose?</p>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a"> It's required by Copilot Studio licensing</label>
+        <label><input type="radio" name="q1" value="b"> A narrowly scoped agent gives grounded, reliable answers about one project instead of vague general ones</label>
+        <label><input type="radio" name="q1" value="c"> General-purpose agents can't be published to Teams</label>
+      </div>
+      <p class="explanation">Narrow beats broad — a scoped agent answers the questions the project team actually asks, reliably.</p>
+    </div>
+    <div class="question" data-answer="a">
+      <p class="q-text">2. What makes {{AGENT_NAME}}'s answers "grounded" rather than generic?</p>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> Connecting the real Planner plan as a knowledge source</label>
+        <label><input type="radio" name="q2" value="b"> Writing longer scoping instructions</label>
+        <label><input type="radio" name="q2" value="c"> Publishing the agent to more channels</label>
+      </div>
+      <p class="explanation">Grounding comes from real project data as a knowledge source, not from instructions alone.</p>
+    </div>
+    <div class="question" data-answer="c">
+      <p class="q-text">3. What's the biggest pitfall this module calls out?</p>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> Publishing too early</label>
+        <label><input type="radio" name="q3" value="b"> Using too many trigger phrases</label>
+        <label><input type="radio" name="q3" value="c"> Scoping instructions too loosely, so the agent answers off-topic questions</label>
+      </div>
+      <p class="explanation">Loose scoping is the most common failure mode — it turns a focused PM agent back into a generic chatbot.</p>
+    </div>
+    <button class="btn" onclick="gradeQuiz()">Check my answers</button>
+    <div id="quizResult"></div>
+  </section>
+
+  <section class="complete-toggle">
+    <label><input type="checkbox" id="completeCheckbox"> Mark this module complete</label>
+  </section>
+
+  <nav class="module-nav">
+    <a class="btn" style="background:transparent;border:1px solid var(--border);color:var(--text-primary);" href="index.html">&larr; Kit Home</a>
+    <a class="btn" href="module-2-planner.html">Next: Using Copilot in Planner &rarr;</a>
+  </nav>
+</main>
+
+<footer class="kit-footer">{{KIT_TITLE}} — Module 1 of 4</footer>
+
+<script>
+function gradeQuiz(){
+  var questions = document.querySelectorAll('.quiz .question');
+  var correctCount = 0;
+  questions.forEach(function(q){
+    var answer = q.getAttribute('data-answer');
+    var checked = q.querySelector('input[type=radio]:checked');
+    var explanation = q.querySelector('.explanation');
+    q.querySelectorAll('.options label').forEach(function(l){ l.classList.remove('correct','incorrect'); });
+    if (!checked) return;
+    var label = checked.closest('label');
+    if (checked.value === answer) {
+      label.classList.add('correct');
+      correctCount++;
+    } else {
+      label.classList.add('incorrect');
+      var correctInput = q.querySelector('input[value="' + answer + '"]');
+      if (correctInput) correctInput.closest('label').classList.add('correct');
+    }
+    if (explanation) explanation.classList.add('show');
+  });
+  document.getElementById('quizResult').textContent = 'You got ' + correctCount + ' of ' + questions.length + ' correct.';
+}
+(function(){
+  var key = 'pm-kit-module-1-complete';
+  var cb = document.getElementById('completeCheckbox');
+  cb.checked = localStorage.getItem(key) === 'true';
+  cb.addEventListener('change', function(){ localStorage.setItem(key, cb.checked); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Change Readiness Assessment — AI Learning Factory</title>
+<meta name="description" content="Take a free 2-minute AI change readiness assessment and get a personalized video walkthrough of your results, plus a full PDF report.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">AI Learning Factory</span>
+    </a>
+    <nav class="site-nav" id="site-nav">
+      <a href="index.html#approach">Approach</a>
+      <a href="index.html#kit">Accelerator Kit</a>
+      <a href="index.html#role-kits">Role Kits</a>
+      <a href="index.html#clients">Clients</a>
+      <a href="index.html#results">Results</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact" class="nav-cta">Book a Strategy Call</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Free AI Change Readiness Assessment</p>
+      <h1>Is your organization ready for the AI rollout you're planning?</h1>
+      <p class="hero-sub">
+        Answer 10 quick questions across the five dimensions of change readiness. You'll get a
+        personalized video walkthrough of your results — delivered by an AI avatar agent — plus a
+        full PDF report, emailed to you in a few minutes.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#assessment-form">Start the assessment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="section section-contact" id="assessment-form">
+    <div class="wrap contact-inner">
+      <h2 class="reveal">Your change readiness assessment</h2>
+      <p class="section-lead reveal">
+        For each statement, choose how much you agree it reflects your organization today.
+      </p>
+
+      <!-- TODO: this form has no backend wired up yet — submitting won't send anything.
+           Once the assessment pipeline is hosted, point "action" at that endpoint. -->
+      <form class="contact-form reveal" id="assessment-form-el" action="#" method="POST">
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-row">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" required>
+        </div>
+
+        <div class="question-group">
+          <h3 class="question-group-title">Awareness</h3>
+          <div class="question">
+            <p class="question-text">Employees understand why this change is happening.</p>
+            <div class="likert" role="radiogroup" aria-label="Employees understand why this change is happening.">
+              <label><input type="radio" name="q1" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q1" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q1" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q1" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q1" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+          <div class="question">
+            <p class="question-text">Leadership has clearly communicated the business reasons for this change.</p>
+            <div class="likert" role="radiogroup" aria-label="Leadership has clearly communicated the business reasons for this change.">
+              <label><input type="radio" name="q2" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q2" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q2" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q2" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q2" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3 class="question-group-title">Desire</h3>
+          <div class="question">
+            <p class="question-text">Employees are motivated to support this change.</p>
+            <div class="likert" role="radiogroup" aria-label="Employees are motivated to support this change.">
+              <label><input type="radio" name="q3" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q3" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q3" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q3" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q3" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+          <div class="question">
+            <p class="question-text">Managers actively encourage participation in the change.</p>
+            <div class="likert" role="radiogroup" aria-label="Managers actively encourage participation in the change.">
+              <label><input type="radio" name="q4" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q4" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q4" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q4" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q4" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3 class="question-group-title">Knowledge</h3>
+          <div class="question">
+            <p class="question-text">Employees know what they need to do differently.</p>
+            <div class="likert" role="radiogroup" aria-label="Employees know what they need to do differently.">
+              <label><input type="radio" name="q5" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q5" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q5" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q5" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q5" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+          <div class="question">
+            <p class="question-text">Training materials exist for the new tools or processes.</p>
+            <div class="likert" role="radiogroup" aria-label="Training materials exist for the new tools or processes.">
+              <label><input type="radio" name="q6" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q6" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q6" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q6" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q6" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3 class="question-group-title">Ability</h3>
+          <div class="question">
+            <p class="question-text">Employees have had a chance to practice the new way of working.</p>
+            <div class="likert" role="radiogroup" aria-label="Employees have had a chance to practice the new way of working.">
+              <label><input type="radio" name="q7" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q7" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q7" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q7" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q7" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+          <div class="question">
+            <p class="question-text">There is time built into schedules to learn and adapt.</p>
+            <div class="likert" role="radiogroup" aria-label="There is time built into schedules to learn and adapt.">
+              <label><input type="radio" name="q8" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q8" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q8" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q8" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q8" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3 class="question-group-title">Reinforcement</h3>
+          <div class="question">
+            <p class="question-text">There are mechanisms in place to track adoption and sustain the change.</p>
+            <div class="likert" role="radiogroup" aria-label="There are mechanisms in place to track adoption and sustain the change.">
+              <label><input type="radio" name="q9" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q9" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q9" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q9" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q9" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+          <div class="question">
+            <p class="question-text">Progress and early wins are recognized and celebrated.</p>
+            <div class="likert" role="radiogroup" aria-label="Progress and early wins are recognized and celebrated.">
+              <label><input type="radio" name="q10" value="1" required><span>Strongly disagree</span></label>
+              <label><input type="radio" name="q10" value="2"><span>Disagree</span></label>
+              <label><input type="radio" name="q10" value="3"><span>Neutral</span></label>
+              <label><input type="radio" name="q10" value="4"><span>Agree</span></label>
+              <label><input type="radio" name="q10" value="5"><span>Strongly agree</span></label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Get my results</button>
+        <p class="form-note" id="assessment-form-note"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>&copy; <span id="year"></span> AI Learning Factory</span>
+    <nav class="footer-nav">
+      <a href="index.html#approach">Approach</a>
+      <a href="index.html#kit">Accelerator Kit</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  document.getElementById('assessment-form-el').addEventListener('submit', function (event) {
+    event.preventDefault();
+    var note = document.getElementById('assessment-form-note');
+    note.style.color = 'var(--text-muted)';
+    note.textContent = 'This assessment isn\'t connected to a live backend yet — the form works, but submitting won\'t send anything until that\'s built.';
+  });
+</script>
+</body>
+</html>

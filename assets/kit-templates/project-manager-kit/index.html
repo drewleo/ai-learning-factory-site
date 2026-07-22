@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{KIT_TITLE}}</title>
+<style>
+:root {
+  --surface-1: #fcfcfb;
+  --page-plane: #f9f9f7;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --gridline: #e1e0d9;
+  --border: rgba(11,11,11,0.10);
+  --accent: #2a78d6;
+  --accent-ink: #ffffff;
+  --accent-wash: #cde2fb;
+  --success: #006300;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-card: 0 1px 2px rgba(11,11,11,0.04), 0 8px 24px -12px rgba(11,11,11,0.12);
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --max-width: 900px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1a1a19;
+    --page-plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --border: rgba(255,255,255,0.10);
+    --accent: #3987e5;
+    --accent-ink: #ffffff;
+    --accent-wash: #17304f;
+    --success: #3fbf3f;
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -12px rgba(0,0,0,0.6);
+  }
+}
+* { box-sizing: border-box; }
+body { margin:0; font-family: var(--font-sans); background: var(--page-plane); color: var(--text-primary); line-height:1.6; }
+h1,h2,h3 { line-height:1.2; margin: 0 0 0.5em; font-weight:650; letter-spacing:-0.01em; }
+p { margin: 0 0 1em; color: var(--text-secondary); }
+.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
+a { color: var(--accent); }
+
+.kit-header { position: sticky; top:0; z-index:10; background: color-mix(in srgb, var(--page-plane) 85%, transparent); backdrop-filter: blur(8px); border-bottom:1px solid var(--border); }
+.header-inner { max-width: var(--max-width); margin:0 auto; padding: 14px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.kit-brand { font-weight:700; display:flex; align-items:center; }
+.overall-progress { font-size:0.85rem; color: var(--text-muted); background: var(--surface-1); border:1px solid var(--border); padding:4px 12px; border-radius:999px; white-space:nowrap; }
+
+.hero { padding: 36px 0 8px; }
+.hero h1 { font-size: 2rem; }
+.hero .lede { font-size:1.15rem; }
+
+.scenario-card { background: var(--accent-wash); border-radius: var(--radius-lg); padding: 24px 28px; margin: 20px 0 32px; }
+.scenario-card h2 { color: var(--text-primary); }
+.scenario-card p { color: var(--text-primary); opacity:0.9; }
+.scenario-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top:16px; }
+@media (max-width: 640px) { .scenario-grid { grid-template-columns: 1fr; } }
+.scenario-grid h4 { margin:0 0 4px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.03em; color: var(--text-primary); opacity:0.7; }
+.scenario-grid p { margin:0; color: var(--text-primary); }
+
+.module-list { display:flex; flex-direction:column; gap:14px; margin: 20px 0 32px; }
+.module-card { display:flex; align-items:center; gap:16px; background: var(--surface-1); border:1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 18px 22px; text-decoration:none; color: var(--text-primary); transition: border-color .15s ease, transform .15s ease; }
+.module-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.module-num { flex-shrink:0; width:36px; height:36px; border-radius:50%; background: var(--accent-wash); color: var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; }
+.module-num.done { background: var(--success); color:#fff; }
+.module-body { flex:1; }
+.module-body h3 { margin:0 0 2px; font-size:1.05rem; }
+.module-body p { margin:0; font-size:0.9rem; color: var(--text-muted); }
+.module-check { flex-shrink:0; font-size:0.8rem; font-weight:600; color: var(--success); white-space:nowrap; }
+.module-arrow { flex-shrink:0; color: var(--text-muted); }
+
+.objectives-box { background: var(--surface-1); border:1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 20px 24px; margin: 0 0 32px; }
+.objectives-box ul { list-style:none; padding:0; margin:0; }
+.objectives-box li { padding: 6px 0 6px 26px; position:relative; color: var(--text-secondary); }
+.objectives-box li::before { content:"\2713"; position:absolute; left:0; color: var(--accent); font-weight:700; }
+
+.reference-row { display:flex; gap:14px; flex-wrap:wrap; margin-bottom: 40px; }
+.reference-row a { flex:1; min-width:200px; text-align:center; background: var(--surface-1); border:1px solid var(--border); border-radius: var(--radius-md); padding: 16px; text-decoration:none; color: var(--text-primary); font-weight:600; }
+.reference-row a:hover { border-color: var(--accent); }
+
+footer.kit-footer { text-align:center; padding: 24px; color: var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border); margin-top:40px; }
+</style>
+</head>
+<body>
+
+<header class="kit-header">
+  <div class="header-inner">
+    <div class="kit-brand">{{LOGO_IMG_TAG}}{{KIT_TITLE}}</div>
+    <div class="overall-progress" id="overallProgress">0 of 4 modules complete</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>{{KIT_TITLE}}</h1>
+    <p class="lede">Four self-paced modules that teach one project manager's real workflow with Copilot — not a generic tour of the platform.</p>
+  </div>
+
+  <section class="scenario-card">
+    <h2>Meet {{PERSONA_FULL}}</h2>
+    <p>Senior Project Manager at {{COMPANY_NAME}}, running <strong>{{PROJECT_NAME}}</strong> — {{USE_CASE_BLURB}}</p>
+    <p>Every module in this kit follows {{PERSONA_FIRST}} solving one real part of that job — by the end, you won't just know how the tools work, you'll have watched a PM use them to solve the exact problem you're facing.</p>
+    <div class="scenario-grid">
+      <div><h4>Module 1</h4><p>Builds {{AGENT_NAME}} to answer status questions and draft updates</p></div>
+      <div><h4>Module 2</h4><p>Drafts and manages the {{PROJECT_NAME}} plan in Planner</p></div>
+      <div><h4>Module 3</h4><p>Turns the plan into a live status dashboard for the steering committee</p></div>
+      <div><h4>Module 4</h4><p>Sets up a personal agent to manage {{PERSONA_FIRST}}'s own day around the project</p></div>
+    </div>
+  </section>
+
+  <section class="objectives-box">
+    <h2>What this kit covers</h2>
+    <ul>
+      <li>Build a project-scoped Copilot Studio agent that answers status questions and drafts updates</li>
+      <li>Use Copilot in Planner to draft, adjust, and summarize a real project plan</li>
+      <li>Build a live status dashboard stakeholders can check without asking you</li>
+      <li>Set up a personal agent that manages your day around the project, not just the project itself</li>
+      <li>Apply a ready-to-use prompt library across Copilot, ChatGPT Enterprise, or Claude</li>
+    </ul>
+  </section>
+
+  <h2>Modules</h2>
+  <div class="module-list" id="moduleList">
+    <a class="module-card" href="module-1-agent.html" data-module="1">
+      <div class="module-num" id="num-1">1</div>
+      <div class="module-body">
+        <h3>Building Your PM Agent in Copilot Studio</h3>
+        <p>Create {{AGENT_NAME}} — scoped to one project, grounded in real data</p>
+      </div>
+      <div class="module-check" id="check-1"></div>
+      <div class="module-arrow">&rarr;</div>
+    </a>
+    <a class="module-card" href="module-2-planner.html" data-module="2">
+      <div class="module-num" id="num-2">2</div>
+      <div class="module-body">
+        <h3>Using Copilot in Planner</h3>
+        <p>Draft, review, and manage the {{PROJECT_NAME}} plan</p>
+      </div>
+      <div class="module-check" id="check-2"></div>
+      <div class="module-arrow">&rarr;</div>
+    </a>
+    <a class="module-card" href="module-3-dashboards.html" data-module="3">
+      <div class="module-num" id="num-3">3</div>
+      <div class="module-body">
+        <h3>Building a PM Status Dashboard with Copilot</h3>
+        <p>Turn the plan into a live view for the steering committee</p>
+      </div>
+      <div class="module-check" id="check-3"></div>
+      <div class="module-arrow">&rarr;</div>
+    </a>
+    <a class="module-card" href="module-4-personal-agent.html" data-module="4">
+      <div class="module-num" id="num-4">4</div>
+      <div class="module-body">
+        <h3>Setting Up Your Personal Agent</h3>
+        <p>Manage {{PERSONA_FIRST}}'s day around the project — morning brief, meeting prep, inbox triage</p>
+      </div>
+      <div class="module-check" id="check-4"></div>
+      <div class="module-arrow">&rarr;</div>
+    </a>
+  </div>
+
+  <div class="reference-row">
+    <a href="prompt-library.html">Prompt Library</a>
+  </div>
+</main>
+
+<footer class="kit-footer">{{KIT_TITLE}} &middot; 4 modules &middot; self-paced</footer>
+
+<script>
+(function(){
+  var completed = 0;
+  for (var i = 1; i <= 4; i++) {
+    var done = localStorage.getItem('pm-kit-module-' + i + '-complete') === 'true';
+    if (done) {
+      completed++;
+      document.getElementById('num-' + i).textContent = '✓';
+      document.getElementById('num-' + i).classList.add('done');
+      document.getElementById('check-' + i).textContent = 'Complete';
+    }
+  }
+  document.getElementById('overallProgress').textContent = completed + ' of 4 modules complete';
+})();
+</script>
+</body>
+</html>
