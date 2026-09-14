@@ -475,6 +475,55 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.15rem); }
 }
 .kit-cta { margin-top: 32px; }
 
+/* ---------- Decision tree ---------- */
+.decision-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 640px;
+}
+.decision-step {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-1);
+  padding: 18px 22px;
+}
+.decision-step:not(:last-child)::after {
+  content: "\2193";
+  display: block;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+.decision-q { font-weight: 600; margin-bottom: 12px; }
+.decision-branches {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.decision-branch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+.decision-branch.is-outcome { color: var(--text-primary); font-weight: 500; }
+.decision-tag {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.decision-tag-yes { background: var(--accent-wash); color: var(--accent); }
+.decision-tag-no { background: var(--gridline); color: var(--text-secondary); }
+
 /* ---------- Why ---------- */
 .why-grid {
   display: grid;
