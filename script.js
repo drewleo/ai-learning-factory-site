@@ -36,26 +36,6 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach((el) => el.classList.add('is-visible'));
 }
 
-// Role kit picker
-const roleSelect = document.getElementById('role-select');
-const roleNote = document.getElementById('role-note');
-
-if (roleSelect) {
-  roleSelect.addEventListener('change', () => {
-    const selected = roleSelect.selectedOptions[0];
-    const status = selected.dataset.status;
-
-    if (status === 'available' && selected.value) {
-      window.location.href = selected.value;
-    } else if (status === 'coming-soon') {
-      roleNote.innerHTML =
-        selected.textContent + ' kit is coming soon &mdash; <a href="#contact">let us know you want it next</a>.';
-    } else {
-      roleNote.textContent = '';
-    }
-  });
-}
-
 // Contact form: block submission until a real form endpoint is configured
 const contactForm = document.getElementById('contact-form');
 const formNote = document.getElementById('form-note');

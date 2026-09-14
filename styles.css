@@ -427,7 +427,7 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.15rem); }
 .portfolio-cta a { color: var(--accent); font-weight: 600; text-decoration: none; }
 .portfolio-cta a:hover { text-decoration: underline; }
 
-/* ---------- Accelerator Kit ---------- */
+/* ---------- Adoption Kit ---------- */
 .kit-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -474,41 +474,6 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.15rem); }
   background: var(--accent);
 }
 .kit-cta { margin-top: 32px; }
-
-.role-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-/* ---------- Role picker ---------- */
-.role-picker {
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.role-picker label { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); }
-.role-picker select {
-  font: inherit;
-  padding: 12px 14px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: var(--page-plane);
-  color: var(--text-primary);
-}
-.role-picker select:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
-.role-note {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin: 0;
-  min-height: 1.3em;
-}
-.role-note a { color: var(--accent); font-weight: 600; text-decoration: none; }
-.role-note a:hover { text-decoration: underline; }
 
 /* ---------- Why ---------- */
 .why-grid {
@@ -754,7 +719,6 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.15rem); }
   .pillar-grid { grid-template-columns: 1fr; }
   .client-card-grid { grid-template-columns: 1fr 1fr; }
   .kit-grid { grid-template-columns: 1fr 1fr; }
-  .role-grid { grid-template-columns: 1fr 1fr; }
   .portfolio-grid { grid-template-columns: 1fr 1fr; }
   .why-grid, .about-grid { grid-template-columns: 1fr; gap: 32px; }
   .case-study-stats { grid-template-columns: 1fr 1fr; }
@@ -763,7 +727,6 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.15rem); }
 @media (max-width: 560px) {
   .portfolio-grid { grid-template-columns: 1fr; }
   .kit-grid { grid-template-columns: 1fr; }
-  .role-grid { grid-template-columns: 1fr; }
   .case-study-stats { grid-template-columns: 1fr; }
   .case-study { padding: 28px 22px; }
   .likert { grid-template-columns: repeat(5, 1fr); font-size: 0.6rem; }
