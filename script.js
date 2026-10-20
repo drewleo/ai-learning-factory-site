@@ -36,18 +36,38 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach((el) => el.classList.add('is-visible'));
 }
 
-// Contact form: block submission until a real form endpoint is configured
+// Contact form: no backend, so build a prefilled mailto: and hand off to the user's email client
 const contactForm = document.getElementById('contact-form');
 const formNote = document.getElementById('form-note');
+const CONTACT_EMAIL = 'drew.leonardi@gmail.com';
 
 if (contactForm) {
   contactForm.addEventListener('submit', (event) => {
-    const action = contactForm.getAttribute('action') || '';
-    if (action.includes('YOUR_FORM_ID')) {
-      event.preventDefault();
-      formNote.style.color = 'var(--text-muted)';
-      formNote.textContent =
-        'Form endpoint not configured yet — set up Formspree/Netlify Forms and update the form "action" in index.html.';
-    }
+    event.preventDefault();
+
+    const name = contactForm.name.value.trim();
+    const email = contactForm.email.value.trim();
+    const company = contactForm.company.value.trim();
+    const message = contactForm.message.value.trim();
+
+    const subject = `AI rollout inquiry${company ? ' — ' + company : ''}`;
+    const bodyLines = [
+      message,
+      '',
+      `Name: ${name}`,
+      `Email: ${email}`,
+      company ? `Company: ${company}` : null,
+    ].filter(Boolean);
+
+    const mailtoUrl =
+      `mailto:${CONTACT_EMAIL}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+
+    window.location.href = mailtoUrl;
+
+    formNote.style.color = 'var(--text-muted)';
+    formNote.textContent =
+      `Opening your email client to send this to ${CONTACT_EMAIL}. If nothing happens, email me directly.`;
   });
 }

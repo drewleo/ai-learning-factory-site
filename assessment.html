@@ -40,9 +40,9 @@
       <p class="eyebrow">Free AI Change Readiness Assessment</p>
       <h1>Is your organization ready for the AI rollout you're planning?</h1>
       <p class="hero-sub">
-        Answer 10 quick questions across the five dimensions of change readiness. You'll get a
-        personalized video walkthrough of your results — delivered by an AI avatar agent — plus a
-        full PDF report, emailed to you in a few minutes.
+        Answer 10 quick questions across the five dimensions of change readiness, and I'll
+        personally follow up with where your organization stands and what closing the gap would
+        take.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#assessment-form">Start the assessment</a>
@@ -58,8 +58,8 @@
         For each statement, choose how much you agree it reflects your organization today.
       </p>
 
-      <!-- TODO: this form has no backend wired up yet — submitting won't send anything.
-           Once the assessment pipeline is hosted, point "action" at that endpoint. -->
+      <!-- No backend: submitting opens a prefilled email to drew.leonardi@gmail.com with the
+           answers below. Point "action" at a real assessment pipeline if one gets built later. -->
       <form class="contact-form reveal" id="assessment-form-el" action="#" method="POST">
         <div class="form-row">
           <label for="name">Name</label>
@@ -218,9 +218,33 @@
 <script>
   document.getElementById('assessment-form-el').addEventListener('submit', function (event) {
     event.preventDefault();
+    var form = event.target;
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+    var company = form.company.value.trim();
+
+    var answers = [];
+    document.querySelectorAll('.question').forEach(function (q) {
+      var text = q.querySelector('.question-text').textContent.trim();
+      var checked = q.querySelector('input[type="radio"]:checked');
+      var answer = checked ? checked.nextElementSibling.textContent.trim() : '(no answer)';
+      answers.push(text + ' — ' + answer);
+    });
+
+    var subject = 'AI change readiness assessment' + (company ? ' — ' + company : '');
+    var bodyParts = ['Name: ' + name, 'Email: ' + email]
+      .concat(company ? ['Company: ' + company] : [])
+      .concat([''], answers);
+
+    var mailtoUrl = 'mailto:drew.leonardi@gmail.com' +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(bodyParts.join('\n'));
+
+    window.location.href = mailtoUrl;
+
     var note = document.getElementById('assessment-form-note');
     note.style.color = 'var(--text-muted)';
-    note.textContent = 'This assessment isn\'t connected to a live backend yet — the form works, but submitting won\'t send anything until that\'s built.';
+    note.textContent = 'Opening your email client to send me your answers — I\'ll personally follow up with your readiness readout.';
   });
 </script>
 </body>
